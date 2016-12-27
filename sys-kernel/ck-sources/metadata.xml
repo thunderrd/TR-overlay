@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>thunderrd@aoaforums.com</email>
+		<name>ThunderRd</name>
+		<description>Overlay Maintainer</description>
+	</maintainer>
+	<use>
+		
+	</use>
+	<upstream>
+		
+	</upstream>
+</pkgmetadata>
