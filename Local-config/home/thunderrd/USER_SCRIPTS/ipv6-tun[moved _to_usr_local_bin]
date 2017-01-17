@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+ifconfig sit0 up
+ifconfig sit0 inet6 tunnel ::216.218.221.42 mtu 1452    	## HE tunnel server IP, mtu 1280-1480
+ifconfig sit1 up
+
+ifconfig sit1 inet6 add 2001:470:ed8b::/48 mtu 1452   		##local ipv6/48 allocation
+# OR
+#ifconfig sit1 inet6 add 2001:470:36:61f::2/64 mtu 1452   	##local ipv6/64 allocation
+
+route -A inet6 add ::/0 dev sit1

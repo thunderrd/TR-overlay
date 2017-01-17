@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# initiates cuda and creates node for video card.  Needed for gpu folding
+
+PATH=$PATH:/usr/local/cuda/bin
+
+modprobe nvidia
+
+if [ "$?" -eq 0 ]; then
+
+# Count the number of NVIDIA controllers found.
+N3D=`/usr/sbin/lspci | grep -i NVIDIA | grep "3D controller" | wc -l`
+NVGA=`/usr/sbin/lspci | grep -i NVIDIA | grep "VGA compatible controller" | wc -l`
+
+N=`expr $N3D + $NVGA - 1`
+for i in `seq 0 $N`; do
+mknod -m 666 /dev/nvidia$i c 195 $i;
+done
+
+mknod -m 666 /dev/nvidiactl c 195 255
+
+# runs script to set the nvidia thermal applet to 'on', and set the fan speed.  
+# Not needed here, as the script is called by .xinitrc-xm for xmonad on this system
+#/home/thunderrd/./nvinit
+
+else
+exit 1
+fi

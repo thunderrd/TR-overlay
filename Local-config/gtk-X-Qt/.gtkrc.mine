@@ -1,0 +1,153 @@
+#.gtkrc-2.0  Use this file to set preferences in xfce stuffs
+
+## SYSTEM-WIDE SETTINGS
+
+## set this stuff globally
+gtk-font-name = "Bitstream Vera Sans Bold 10"
+#gtk-icon-theme-name = "Faenza"		#put icon theme name here if desired
+#gtk-theme-name = " "    				#put theme name here if desired
+
+
+style "default"
+{
+ fg[NORMAL]         = "#bcbcbc"        	# Main Menu TEXT colour    [gray]
+ fg[PRELIGHT]       = "#b1b1b1"        	# slightly darker than main text	[darker gray]   
+ fg[ACTIVE]           = "#d8d8d8"        	# lighter than main text  [lightest gray] 
+ fg[SELECTED]      = "#000000"        	# black: was originally white - #ffffff
+ fg[INSENSITIVE]   = "#757f90"        	# Inactive menu entries & inactive highlight   [blue-gray]
+  
+ bg[NORMAL]        = "#3e3e3e"        	# Main Menu BACKGROUND colour 	[dark red-gray]
+ bg[PRELIGHT]      = "#5058a0"        	# active highlight	[dark lilac]
+ bg[ACTIVE]          = "#2b2b2b"        	# darker secondary b'ground - rarely used   [slightly darker red-gray than #3e3e3e above]
+ bg[SELECTED]      = "#5058a0"        	# active highlight   [dark lilac]
+ bg[INSENSITIVE]   = "#575757"        	# lighter minor background  [slightly lighter than #2b2b2b]     
+
+ text[NORMAL]      = "#ABABAB"        	# Main Text, including fields
+ text[PRELIGHT]    = "#ABABAB"        	#   "    "       "       "   
+ text[ACTIVE]        = "#ababab"        	#   "    "       "       " 		#ABABAB: medium gray
+ text[SELECTED]    = "#ababab"        	#   "    "       "       " 
+ text[INSENSITIVE] = "#757f90"        	# inactive highlight      [blue-gray]
+
+ base[NORMAL]      = "#2b2b2b"        	# darker - secondary background colour
+ base[PRELIGHT]    = "#5058a0"        	# active highlight & menu entries
+ base[ACTIVE]        = "#757f90"        	# inactive highlight
+ base[SELECTED]    = "#5058a0"        	# active highlight
+ base[INSENSITIVE] = "#575757"        	# lighter minor background
+
+
+############### crazy, blinding test colors below #############
+	
+#  base[NORMAL]      = "#ff2a00"        	# Main Text, including fields 	red
+#  base[PRELIGHT]    = "#02ff00"        	#   "    "       "       "   	light green
+#  base[ACTIVE]      = "#ff00f3"        	#   "    "       "       "      pink
+#  base[SELECTED]    = "#00e1ff"        	#   "    "       "       "   	turquoise
+#  base[INSENSITIVE] = "#ff7a00"       	# inactive highlight      	orange
+
+############### end test colors ###############################
+
+    engine "xfce" 
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = plain
+        }
+    }
+}
+
+widget_class "*"                   style "default"
+
+###########
+
+## XFCE4-PANEL SETTINGS
+style "panel"
+    {
+
+  bg[NORMAL] = "#1a1917"					#button color for inactive buttons unhovered
+#  bg_pixmap[NORMAL] = "xfce_panel5-brown.png"			#button pixmap for panel itself, if wanted
+
+
+  fg[NORMAL] = "#ececec" 					#active button text color unhovered
+
+  bg[PRELIGHT] = "#1a1917"					#background color for panel icons
+  fg[PRELIGHT] = "#ffffff"					#text color for all window buttons, when hovered
+
+  fg[ACTIVE] = "#FFA500"					#text color for unhovered active window button
+  bg[ACTIVE] = "#3f3d3a"					#button color for active button in focus
+
+
+    engine "pixmap" 
+        {
+        image {
+            function    = BOX
+            recolorable    = TRUE
+            state        = NORMAL
+            }
+        image {
+            function    = BOX
+            recolorable    = TRUE
+            state        = PRELIGHT
+            file        = "TRANSPARENT.png"
+            border        = { 3, 1, 1, 1 }
+            stretch        = TRUE
+            }
+        image {
+            function    = BOX
+            recolorable    = TRUE
+            state        = ACTIVE
+            file        = "TRANSPARENT.png"
+            border        = { 3, 1, 1, 1 }
+            stretch        = TRUE
+            }
+        image {
+            function    = BOX
+            recolorable    = TRUE
+            state        = SELECTED
+            file        = "TRANSPARENT.png"
+            border        = { 3, 1, 1, 1 }
+            stretch        = TRUE
+            }
+        image {
+            function    = BOX
+            recolorable    = TRUE
+            state        = NORMAL
+            }
+        image {
+            function    = ARROW
+            recolorable    = TRUE
+            arrow_direction    = DOWN
+            }
+        }
+    }
+
+#widget_class "*Panel*"      style "panel"
+widget "*Panel*"            style "panel"
+#class "*Panel*"             style "panel"
+
+#######################
+
+## APP MENU SETTINGS
+style "gtk-theme-config-menu"
+     {
+bg[NORMAL]	="#8E8E8E"
+bg[ACTIVE]	="#8E8E8E"
+bg[INSENSITIVE]	="#8E8E8E"
+fg[NORMAL]	="#d6be96"
+#fg[INSENSITIVE]	=mix(0.5,"#d6be96","#8E8E8E")
+fg[INSENSITIVE]	="#d6be96"
+     }
+
+widget_class "*<GtkMenu>*"  style "gtk-theme-config-menu"
+#widget "*<GtkMenu>*"  style "gtk-theme-config-menu"
+#class "*<GtkMenu>*"  style "gtk-theme-config-menu"
+
+#######################
+
+## SCROLLBAR STUFF
+style "myscrollbar"
+{
+     GtkScrollbar::slider-width=15
+}
+class "GtkScrollbar" style "myscrollbar"
+
+#######################

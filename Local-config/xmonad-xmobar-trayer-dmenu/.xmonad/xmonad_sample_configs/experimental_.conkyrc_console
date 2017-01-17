@@ -1,0 +1,25 @@
+# .conkyrc_console
+
+
+#On background
+background no
+
+cpu_avg_samples 2
+net_avg_samples 2
+
+out_to_x no
+out_to_console yes
+
+# Update interval in seconds
+update_interval 1
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+text_buffer_size 512
+
+# MPD host/port
+mpd_host localhost
+mpd_port 6600
+
+TEXT
+^fg(red)Up: ^fg(white)$uptime_short    |    ${addr eth0}    |    ^fg(red)Cpu: ^fg(white)${cpu}%    |    ^fg(red)Mem: ^fg(white)$mem/$memmax - $memperc%    |    ^fg(red)Down: ^fg(white)${downspeedf eth0} Kb/s ${totaldown eth0}    |    ^fg(red)Up: ^fg(white)${upspeedf eth0} Kb/s ${totalup eth0}    |    ^fg(red)Home: ^fg(white)${fs_free /home} - ${fs_free_perc /home}%

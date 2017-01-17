@@ -1,0 +1,80 @@
+#.gtkrc-2.0  Use this file to set preferences in xfce stuffs
+
+## SYSTEM-WIDE SETTINGS
+
+## set this stuff globally
+#gtk-font-name = "Bitstream Vera Sans Bold 10"
+gtk-font-name = "Go Bold 11"
+gtk-icon-theme-name = "Echo"
+#gtk-theme-name = " "    			#put theme name here if desired
+
+
+style "default"
+{
+ fg[NORMAL]        = "#585858"        		# Main Menu TEXT colour    	#585858
+ fg[PRELIGHT]      = "#000000"        	# slightly darker than main text	#000000  
+ fg[ACTIVE]        = "#737373"        		# lighter than main text  	#d8d8d8 
+ fg[SELECTED]      = "#000000"        	# black
+ fg[INSENSITIVE]   = "#318794"	      	#	"#b5b5b5" Inactive menu entries & inactive highlight: unavailable selections in browser menus
+  
+ bg[NORMAL]        = "#f7f7f7"        		# Main Menu BACKGROUND color 	#f7f7f7
+ bg[PRELIGHT]      = "#e3ddd6"        	# active highlight		#e3ddd6
+ bg[ACTIVE]        = "#f7f7f7"        		# darker secondary b'ground       #f7f7f7
+ bg[SELECTED]      = "#5058a0"        	# active highlight   		#5058a0
+ bg[INSENSITIVE]   = "#cccccc"        	# lighter minor background      	#cccccc   
+
+ text[NORMAL]      = "#371f0e"        		# Main Text, including fields
+ text[PRELIGHT]    = "#371f0e"        	#   "    "       "       "   
+ text[ACTIVE]      = "#371f0e"        		#   "    "       "       " 	#371f0e
+ text[SELECTED]    = "#371f0e"        	#   "    "       "       " 
+ text[INSENSITIVE] = "#000000"        	# inactive highlight      	#000000
+
+ base[NORMAL]      = "#f5f5f5"        		# darker - secondary background colour #f5f5f5
+ base[PRELIGHT]    = "#E3DDD6"        	# active highlight & menu entries	#e3ddd6
+ base[ACTIVE]      = "#d8c3aa"        	# inactive highlight		#d8c3aa
+ base[SELECTED]    = "#D6BBA2"        	# active highlight 		#d6bba2
+ base[INSENSITIVE] = "#a5a5a5"        	# lighter minor background	#a5a5a5
+
+
+    engine "xfce" 
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = plain
+        }
+    }
+
+
+}
+
+widget_class "*"                   style "default"
+
+
+############### end test colors ###############################
+
+
+## APP MENU SETTINGS
+style "gtk-theme-config-menu"
+     {
+bg[NORMAL] ="#535148"	#8e8e8e
+#bg[ACTIVE] ="#ff0000"		#8e8e8e
+#bg[INSENSITIVE] ="#ff0000"	#8e8e8e
+fg[NORMAL] ="#a0a0a0"		#d6be96
+fg[INSENSITIVE] ="#b5b5b5"	#mix(0.0,"#d6be96","#8E8E8E")
+     }
+
+widget_class "*<GtkMenu>*"  style "gtk-theme-config-menu"
+#widget "*<GtkMenu>*"  style "gtk-theme-config-menu"
+#class "*<GtkMenu>*"  style "gtk-theme-config-menu"
+
+#######################
+
+## SCROLLBAR STUFF
+style "myscrollbar"
+{
+     GtkScrollbar::slider-width=15
+}
+class "GtkScrollbar" style "myscrollbar"
+
+#######################

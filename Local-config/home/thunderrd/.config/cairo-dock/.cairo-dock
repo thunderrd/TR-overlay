@@ -1,0 +1,15 @@
+
+[Launch]
+last version=3.4.1
+default backend=
+test composite=false
+
+last year=2017
+
+ping server=true
+
+[Help]
+entered once=true
+
+[Gui]
+mode=0

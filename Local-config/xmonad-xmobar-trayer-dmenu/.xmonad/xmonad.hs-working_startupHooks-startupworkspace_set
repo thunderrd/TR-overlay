@@ -1,0 +1,104 @@
+-- ~/.xmonad/xmonad.hs
+
+
+-- these are the utility modules to import
+import XMonad
+
+import Data.Monoid
+import System.Exit
+import qualified XMonad.StackSet as W
+import qualified Data.Map        as M
+import XMonad.Actions.SpawnOn           --for startupHook
+
+
+-- the following 5 lines cribbed from the John Goerzen config
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import System.IO
+import Text.Regex.Posix
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- defines workspace names
+myWorkspaces = ["shell", "fah", "web", "irc", "files"] ++ map show [6..9]
+
+-- where do I want to be after XMonad starts
+startupWorkspace = "web"
+
+-- which apps should have floating windows, (under construction)
+myManageHook = composeAll
+	[ className =? "Gimp" --> doFloat 
+	, className =? "Qjackctl" --> doShift "9"				--shifts all child windows of qjackctl to WS "9"
+	, className =? "Hexchat" --> doShift "irc"
+--	, className =? "Thunar" --> doShift "files"
+	]
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+main = do
+    xmproc <- spawnPipe "xmobar"				     		--starts xmobar, passes CL arg path to config file
+    xmonad $ defaultConfig
+        { 
+	  workspaces         = myWorkspaces
+
+        , terminal           = "urxvt"				     		--specifies terminal program
+
+	, borderWidth        = 1				    		--width of window borders
+        , normalBorderColor  = "#000000"			    		--color of unfocused window border
+        , focusedBorderColor = "#B87333"    --"#C76114"		     		--color of focused window border
+
+        , focusFollowsMouse = False
+
+        , manageHook = manageHook defaultConfig
+		   <+> manageDocks
+		   <+> myManageHook
+		   <+> manageSpawn
+
+
+        , layoutHook = avoidStruts  $  layoutHook defaultConfig
+
+        , logHook = dynamicLogWithPP xmobarPP                        		--logHook uses hPutStrLn xmproc; pipes data to xmb
+                        { ppOutput = hPutStrLn xmproc
+                        , ppTitle = xmobarColor "#0EBFE9" "" . shorten 70  	--70 characters of window title in xmb
+                        }                                                  
+
+----------------------------------------
+-- startuphooks to start app on specific workspace automatically
+
+	, startupHook = do 			--The sequence here seems to be essential to make apps spawn on the assigned WS.
+						--Be careful when re-arranging.
+	      	spawnOn "irc" "hexchat"
+--	      	spawnOn "files" "thunar"
+	      	spawnOn "9" "qjackctl"
+	      	spawnOn "9" "sleep 4; exec vlc"
+	      	spawnOn "web" "firefox"		--make sure firefox is in the list before urxvt; or urxvt windows all spawn on WS1
+	      	spawnOn "shell" "urxvt"
+	        spawnOn "fah" "urxvt"
+	      	spawnOn "files" "thunar"
+
+     		windows $ W.view startupWorkspace --looks like this line has to be last
+-----------------------------------------
+
+        }
+
+		`additionalKeys` myKeys                                         
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+-- Key bindings. Add, modify or remove key bindings here.
+
+myKeys =
+
+-- launch dmenu, version 4.5.x
+    [
+    ((mod1Mask,   xK_p), spawn "dmenu_run -nb '#535148' -nf 'burlywood' -fn '-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*' -sb 'burlywood' -sf 'black'")
+
+-- take a full-screen screenshot
+    , ((mod1Mask,   xK_Print     ), spawn "/usr/bin/screenshot scr")
+
+-- [add other bindings here]
+
+    ]

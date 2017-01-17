@@ -1,0 +1,90 @@
+## !/bin/sh
+
+## ~/.xinitrc-xm   [For Xmonad logon session.  Invokes ~/.gtkrc-2.0-xm and ~/.Xdefaults-xm]
+
+##
+## This file exports environment variables that affect apps running over X, starts daemons, and finally starts the WM
+##
+
+# starts the urxvt daemon
+urxvtd -q -f -o
+
+
+# Let Qt find the GTK config
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0-xm"
+
+
+## The following 3 lines handle the .Xdefaults/.Xresources linkage
+if [ -f ~/.Xdefaults-xm ]; then
+   xrdb -merge /home/thunderrd/.Xdefaults-xm
+fi
+
+
+##turns on numlock
+numlockx
+
+
+## Starts the trayer tray application in xmonad, try 0x535148 for bg color          # --tint "0x828282"
+trayer --edge top --align right --expand true --SetPartialStrut true  --SetDockType true --width 8 --height 19 --padding 22 --transparent true --alpha 0 --tint "0x1D1C1A" &
+
+
+# sets an X cursor
+xsetroot -cursor_name left_ptr
+
+
+# sets the screen blanker off, then sets the monitor to: no standby, suspend in 15 minutes, poweroff in 20 mins VIA DPMS
+xset s off && xset dpms 0 900 1200
+
+
+# sets nvidia thermal applet to 'on', and fan control to 'x'%
+nvidia-settings -a [gpu:0]/GPUFanControlState=1
+nvidia-settings -a [fan:0]/GPUTargetFanSpeed=65     ##this is syntax for newer kernels, changed from 'GPUCurrentFanSpeed'
+
+
+# starts the polipo web cache proxy for torbrowser, second instance [non-root], with proxyPort=8124 (root instance is 8123, default)
+# the root instance is started from /etc/init.d/polipo, for non-tor web browser
+#/usr/bin/polipo -c /etc/polipo/config-torbrowser &
+
+
+########### background/transparency stuffs###############
+
+# sets the xmonad wallpaper; use hsetroot or feh:
+#hsetroot -fill /home/thunderrd/images/wallpaper/gentoo-current.png
+feh --bg-scale /home/thunderrd/images/wallpaper/gentoo-current.png
+
+
+# Load a compositing manager [needed for real transparency in urxvt].  Since enabling transparency in Xmonad, xcompmgr bugs are evident; Compton seems to be less buggy, see below.
+# Options defined here:  "-c" soft shadows and transparency support, "-f" for fade in & fade out when creating and closing windows, "-F" for fade when changing a window's transparency.
+# "-t-9 -l-11" shadows are offset 9 pixels from top of the window[default -15], and 11 pixels from the left edge[default -15]
+# "-r9" shadow radius is 9 pixels[default 12]
+# "-o.95" shadow opacity is set to 0.95[default .75]
+# "-D6" the time between each step when fading windows is set to 6 milliseconds[default 10]
+# "-O.03" opacity change between steps while fading out[default 0.03]
+#xcompmgr -cF -t-9 -l-11 -r9 -o.95 -D6 &
+
+# via compton: this seems better; xcompmgr buggy re: thunar launching with -f.  Compton does not exhibit same behavior, and no 'error 138: bad region requests' like xcompmgr
+compton -f --config ~/.config/compton/compton.conf &			# -b daemon, -f fade
+
+############# end transparency section ##################
+
+
+# starts redshift
+/usr/bin/redshift-gtk -l 17.416667:102.75 -t 5500:4000 &
+
+
+########################################################
+#### An assortment of different startup invocations ####
+########################################################
+
+# the following line starts dbus session, udiskie [for automounting removable media], then xmonad
+exec ck-launch-session dbus-launch bash -c "udiskie -n -s -2 & /usr/bin/xmonad"   		## -n for notifications, -s for 'smart' tray icon, -2 for udisks2
+
+# same thing as above, but only dbus/xmonad
+#exec ck-launch-session dbus-launch /usr/bin/xmonad
+
+# same as above, only xmonad
+#exec ck-launch-session /usr/bin/xmonad
+
+# no consolekit, only xmonad
+#exec dbus-launch /usr/bin/xmonad
+
