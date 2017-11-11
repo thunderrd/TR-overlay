@@ -1,10 +1,10 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-
 EAPI=5
 
 PYTHON_COMPAT=( python3_{5,6} )
+
 inherit distutils-r1 git-r3 linux-mod
 
 DESCRIPTION="Razer Drivers for Linux"
@@ -19,13 +19,13 @@ RDEPEND="
 	media-libs/sdl2-image
 	sci-libs/fftw:3.0
 	dev-python/daemonize[$PYTHON_USEDEP]
- 	dev-python/dbus-python[$PYTHON_USEDEP]
- 	dev-python/notify2[$PYTHON_USEDEP]
- 	dev-python/numpy[$PYTHON_USEDEP]
- 	dev-python/pygobject[$PYTHON_USEDEP]
- 	dev-python/python-evdev[$PYTHON_USEDEP]
- 	dev-python/pyudev[$PYTHON_USEDEP]
- 	dev-python/setproctitle[$PYTHON_USEDEP]
+	dev-python/dbus-python[$PYTHON_USEDEP]
+	dev-python/notify2[$PYTHON_USEDEP]
+	dev-python/numpy[$PYTHON_USEDEP]
+	dev-python/pygobject[$PYTHON_USEDEP]
+	dev-python/python-evdev[$PYTHON_USEDEP]
+	dev-python/pyudev[$PYTHON_USEDEP]
+	dev-python/setproctitle[$PYTHON_USEDEP]
 	x11-misc/xautomation
 	x11-misc/xdotool
 
