@@ -1,14 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="6"
+EAPI=6
 
 inherit autotools eutils git-r3
 
 DESCRIPTION="Emerald Window Decorator"
 HOMEPAGE="https://github.com/compiz-reloaded"
-EGIT_REPO_URI="git://github.com/compiz-reloaded/emerald.git"
+EGIT_REPO_URI="https://github.com/compiz-reloaded/emerald.git"
 
 LICENSE="GPL-2+"
 SLOT="0"

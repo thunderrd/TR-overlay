@@ -1,15 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="6"
+EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
 inherit git-r3 gnome2-utils
 
 DESCRIPTION="Desktop menu for Compiz"
 HOMEPAGE="https://github.com/compiz-reloaded"
-EGIT_REPO_URI="git://github.com/compiz-reloaded/compiz-boxmenu.git"
+EGIT_REPO_URI="https://github.com/compiz-reloaded/compiz-boxmenu.git"
 
 LICENSE="GPL-2+"
 SLOT="0"

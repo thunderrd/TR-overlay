@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="6"
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_IN_SOURCE_BUILD=1
@@ -10,7 +9,7 @@ inherit distutils-r1 git-r3 gnome2-utils
 
 DESCRIPTION="A graphical manager for CompizConfig Plugin (libcompizconfig)"
 HOMEPAGE="https://github.com/compiz-reloaded"
-EGIT_REPO_URI="git://github.com/compiz-reloaded/ccsm.git"
+EGIT_REPO_URI="https://github.com/compiz-reloaded/ccsm.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -20,7 +19,7 @@ RDEPEND="
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	>=dev-python/compizconfig-python-${PV}[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	gnome-base/librsvg
+	gnome-base/librsvg[introspection]
 "
 
 python_prepare_all() {
