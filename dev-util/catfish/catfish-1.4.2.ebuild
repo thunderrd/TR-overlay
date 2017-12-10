@@ -1,9 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python2_7 )
 inherit eutils gnome2-utils python-single-r1
 
 DESCRIPTION="A frontend for find, (s)locate, doodle, tracker, beagle, strigi and pinot"
@@ -36,6 +35,14 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+	cp ${FILESDIR}/catfish.in.in ${S}/bin
+	cp ${FILESDIR}/catfish.py ${S}/bin
+	cp ${FILESDIR}/build.py ${S}
+	cp ${FILESDIR}/configure ${S}
+	cp ${FILESDIR}/control.in.in ${S}
+	cp ${FILESDIR}/Makefile.in.in ${S}
+
 	strip-linguas -i po/
 	if ! [[ -z "${LINGUAS}" ]]; then
 		local lang langs=$(find po/ -name '*.po' | sed -e 's|po/||g;s|.po||g')
@@ -46,7 +53,7 @@ src_prepare() {
 		done
 	fi
 
-	python_fix_shebang .
+	#python_fix_shebang .
 	sed -i -e "s:share/doc/\$(APPNAME):share/doc/${PF}:" Makefile.in.in || die
 }
 
