@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# sets the parameters to backup the folding directories.  the script is invoked by /home/thunderrd/thunderrd.cron
-
-dirtime=`date +"%m-%d-%H-%M"`                                         	 #makes a variable with the date and hour
-
-rsync -r /home/thunderrd/FAH6 /mnt/ext4_STORAGE2/FAH-BU/$dirtime      	 #copies recursively and names it based on time
-
-#rsync -r /home/thunderrd/FAH-GPU /mnt/ext4_STORAGE2/FAHGPU-BU/$dirtime	 #copies recursively and names it based on time

@@ -1,1 +1,0 @@
-find /usr -name '*.png' -exec sh -c 'identify {} 2>&1 | grep -q "identify: iCCP"; if [ $? -eq 0 ]; then mogrify -set colorspace sRGB -profile sRGB_v4_ICC_preference.icc {} 2>/dev/null; fi' \;

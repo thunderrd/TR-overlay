@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl --request GET 'https://thunderrd:lEx8AXuNg4F3vcMe@ipv4.tunnelbroker.net/nic/update?hostname=317480' > /home/thunderrd/ipv4log.txt 2>&1

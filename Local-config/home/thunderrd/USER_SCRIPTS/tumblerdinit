@@ -1,4 +1,0 @@
-## !/bin/sh
-
-## starts the tumblerd daemon
-/usr/lib64/tumbler-1/tumblerd
