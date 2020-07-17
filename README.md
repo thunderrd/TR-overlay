@@ -1,2 +1,2 @@
 
-ThunderRd's Gentoo overlay; some customized ebuilds, and a few obsolete ebuilds for apps removed from portage
+ThunderRd's Gentoo overlay; some customized ebuilds, and a few obsolete ebuilds for apps removed from portage that I use
