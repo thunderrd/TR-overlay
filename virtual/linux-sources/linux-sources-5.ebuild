@@ -1,6 +1,8 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+#written to satisfy the virtual/linux-sources for ck-sources, no longer in portage -BZ
+
 EAPI=7
 
 DESCRIPTION="Virtual for Linux kernel sources"
